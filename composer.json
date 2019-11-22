@@ -1,0 +1,13 @@
+{
+    "name": "tvojekostatus-eshop",
+    "description": "New eshop in Prestashop",
+    "type": "project",
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "php": ">= 7.1",       
+        "dg/ftp-deployment": "^3.0"
+    },
+    "minimum-stability": "stable"
+}
