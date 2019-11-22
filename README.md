@@ -1,0 +1,1 @@
+# tvojekostatus-eshop
