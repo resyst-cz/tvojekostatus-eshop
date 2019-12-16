@@ -1,0 +1,15 @@
+{shop_url}
+
+Dobrý den {firstname} {lastname},
+
+Zpráva z obchodu {shop_name}
+
+Z obchodu {shop_name} jste dostali novou zprávu týkající se objednávky s označením {order_name}.
+
+Obsah zprávy:
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop.com/?utm_source=marchandprestashop&utm_medium=e-mail=utm_campaign=footer_1-7)

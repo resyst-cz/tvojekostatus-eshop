@@ -1,0 +1,38 @@
+Version 4.2.12
+2015-10-29 2015-11-18
+Support for price/qty update of tags.
+Version 4.2.13
+2015-11-18 2015-12-16
+Skip CSV records with no contents.
+Reuse connection when retrieving images.
+Version 4.2.14
+2015-12-16 2016-02-16
+Features must not be removed when doing price/qty update.
+Fix for UTF-16LE.
+Version 4.2.15
+2016-02-16 2016-03-14
+New method for sharing of images.
+Version 4.2.16
+2016-03-14 2016-04-20
+Use less memory for attributes.
+Version 4.2.18
+2016-09-29 2016-11-20
+Ignore images for products where url field is blank.
+Added db log.
+Category names were updated unecessarily.
+Version 4.2.19
+2016-11-20 2016-12-04
+Fixed parameter bug in ExecuteS.
+Fixed cron handling of confSupplierId.
+Version 4.2.20
+2016-12-04 2017-01-13
+Do not update stock_available table when doing price/qty for unlisted products.
+Field default_on should only be NULL for 1.6 and later.
+Version 4.2.21
+2017-01-13 2017-04-14
+Use links for images with same URL.
+Use transaction to protect against SQL errors.
+Updated with current file from cykelshoppen.dk.
+Fixed problem with price/qty and attributes.
+Handle quantity price/update differently for CSV files (CASE/WHEN).
+Fixed for legacy image structure.

@@ -1,0 +1,13 @@
+{shop_url}
+
+Dobrý den {firstname} {lastname},
+
+Objednávka ID {order_name} - Dobropis
+
+Na vaše jméno byl pro objednávku s označením {order_name} vygenerován dobropis.
+
+Prohlédnout tento dobropis a stáhnout fakturu můžete v zákaznické sekci našeho obchodu na odkazu [Dobropisy]({history_url}).
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop.com/?utm_source=marchandprestashop&utm_medium=e-mail=utm_campaign=footer_1-7)

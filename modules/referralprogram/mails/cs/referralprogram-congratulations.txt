@@ -1,0 +1,13 @@
+{shop_url}
+
+Blahopřejeme!
+
+Váš doporučený přítel {sponsored_firstname} {sponsored_lastname} zadal svou první objednávku v obchodě [{shop_name}]({shop_url})!
+
+Jsme rádi, že vám můžeme nabídnout kupón v hodnotě {discount_display} (KUPÓN # {discount_name}), který můžete použít při další objednávce.
+
+S pozdravem,
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop.com/?utm_source=marchandprestashop&utm_medium=e-mail=utm_campaign=footer_1-7)

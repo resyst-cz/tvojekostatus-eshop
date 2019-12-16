@@ -1,0 +1,15 @@
+{shop_url}
+
+Dobrý den {firstname} {lastname},
+
+Objednávka ID {order_name} - Vrácení platby se zpracovává
+
+Vrácení platby za vaši objednávku s označením {order_name} z obchodu {shop_name} jsme zpracovali.
+
+Sledovat tuto objednávku a stáhnout fakturu si můžete v našem obchodě, přejděte do části [Historie a detaily objednávek]({history_url}) ve svém zákaznickém účtu.
+
+Pokud máte účet hosta, objednávku můžete sledovat v části [Sledování pro návštěvníky]({guest_tracking_url}) našeho obchodu.
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop.com/?utm_source=marchandprestashop&utm_medium=e-mail=utm_campaign=footer_1-7)

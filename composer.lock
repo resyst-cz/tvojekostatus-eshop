@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fea30e1cdebb22fe8c27041d142ee97",
-    "packages": [
+    "content-hash": "76e5c15675af7bf96042296fc3abddbb",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "dg/ftp-deployment",
             "version": "v3.2.2",
@@ -69,14 +70,13 @@
             "time": "2019-10-22T17:44:00+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">= 7.1"
+        "php": ">= 7.3"
     },
     "platform-dev": []
 }

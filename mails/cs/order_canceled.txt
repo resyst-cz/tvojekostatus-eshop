@@ -1,0 +1,15 @@
+{shop_url}
+
+Dobrý den {firstname} {lastname},
+
+Objednávka ID {order_name} - Objednávka zrušena
+
+Vaše objednávka s označením {order_name} v obchodě {shop_name} byla zrušena prodejcem.
+
+Více informací získáte ve svém zákaznickém účtu.
+
+Pokud máte účet hosta, objednávku můžete sledovat v části [Sledování pro návštěvníky]({guest_tracking_url}) našeho obchodu.
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop.com/?utm_source=marchandprestashop&utm_medium=e-mail=utm_campaign=footer_1-7)
