@@ -37,6 +37,10 @@ config/xml/*.xml
 *sitemap.xml
 themes/*/cache/
 modules/*/config*.xml
+node_modules/
+.sass-cache/
+themes/ekostatus/assets/css/styles.concatenated.css
+themes/ekostatus/assets/css/variables.css
 
 # Site content
 # The following folders contain product images, virtual products, CSV's, etc.

@@ -1,0 +1,29 @@
+{
+  "name": "tvojekostatus-eshop",
+  "version": "1.0.0",
+  "description": "Repository for Tvoj Eko Status eshop",
+  "dependencies": {},
+  "devDependencies": {
+    "concat": "^1.0.3",
+    "node-sass": "^4.13.0",
+    "sass": "^1.23.7",
+    "uglifycss": "0.0.29"
+  },
+  "scripts": {
+    "sass-watch": "node-sass --watch themes/ekostatus/resources/sass -o themes/ekostatus/assets/css",
+    "sass": "node-sass themes/ekostatus/resources/sass -o themes/ekostatus/assets/css",
+    "concat-css": "concat -o themes/ekostatus/assets/css/styles.concatenated.css themes/ekostatus/assets/css/original-theme.css themes/ekostatus/assets/css/error.css themes/ekostatus/assets/css/template.css",
+    "minify-css": "uglifycss --ugly-comments themes/ekostatus/assets/css/styles.concatenated.css > themes/ekostatus/assets/css/styles.min.css",
+    "pre-deploy": "npm run sass && npm run concat-css && npm run minify-css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resyst-cz/tvojekostatus-eshop.git"
+  },
+  "author": "ReSyst.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/resyst-cz/tvojekostatus-eshop/issues"
+  },
+  "homepage": "https://github.com/resyst-cz/tvojekostatus-eshop#readme"
+}
