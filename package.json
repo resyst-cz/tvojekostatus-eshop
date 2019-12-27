@@ -10,10 +10,10 @@
     "uglifycss": "0.0.29"
   },
   "scripts": {
-    "sass-watch": "node-sass --watch themes/ekostatus/resources/sass -o themes/ekostatus/assets/css",
-    "sass": "node-sass themes/ekostatus/resources/sass -o themes/ekostatus/assets/css",
-    "concat-css": "concat -o themes/ekostatus/assets/css/styles.concatenated.css themes/ekostatus/assets/css/original-theme.css themes/ekostatus/assets/css/error.css themes/ekostatus/assets/css/template.css",
-    "minify-css": "uglifycss --ugly-comments themes/ekostatus/assets/css/styles.concatenated.css > themes/ekostatus/assets/css/styles.min.css",
+    "sass-watch": "node-sass --watch themes/Cactuplan/resources/sass -o themes/Cactuplan/assets/css",
+    "sass": "node-sass themes/Cactuplan/resources/sass -o themes/Cactuplan/assets/css",
+    "concat-css": "concat -o themes/Cactuplan/assets/css/styles.concatenated.css themes/Cactuplan/assets/css/original-theme.css themes/Cactuplan/assets/css/original-custom.css themes/Cactuplan/assets/css/resyst.css",
+    "minify-css": "uglifycss --ugly-comments themes/Cactuplan/assets/css/styles.concatenated.css > themes/Cactuplan/assets/css/styles.min.css",
     "pre-deploy": "npm run sass && npm run concat-css && npm run minify-css"
   },
   "repository": {

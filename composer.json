@@ -11,5 +11,9 @@
   "minimum-stability": "stable",
   "require-dev": {
     "dg/ftp-deployment": "^3.2"
+  },
+  "scripts": {
+    "deploy:staging": "vendor/dg/ftp-deployment/deployment deployment-staging.ini",
+    "deploy:staging:test": "vendor/dg/ftp-deployment/deployment deployment-staging.ini -t"
   }
 }
