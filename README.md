@@ -58,6 +58,3 @@ Budes potrebovat par vychytavek, abys mohl pohodlne vyvijet :wink:
 - pro pripraveni CSS souboru k deployi spust prikaz `npm run pre-deploy`
 - pro nahrani zmen na staging server si bud nastav automaticky upload na FTP nebo spust `composer deploy:staging` 
 - commitni a pushni zmeny do gitu
-
-
-lukas test

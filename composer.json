@@ -13,7 +13,7 @@
     "dg/ftp-deployment": "^3.2"
   },
   "scripts": {
-    "deploy:staging": "vendor/dg/ftp-deployment/deployment deployment-staging.ini",
-    "deploy:staging:test": "vendor/dg/ftp-deployment/deployment deployment-staging.ini -t"
+    "deploy:staging": "php vendor/dg/ftp-deployment/deployment deployment-staging.ini",
+    "deploy:staging:test": "@deploy:staging -t"
   }
 }
