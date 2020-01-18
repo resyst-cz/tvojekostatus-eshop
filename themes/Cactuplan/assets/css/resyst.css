@@ -7,3 +7,6 @@
 
 .footer-container li a {
   color: #333; }
+
+.header-top-wrapper.fixed img.logo {
+  max-height: 42px; }
