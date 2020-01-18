@@ -6,10 +6,7 @@ deployment*
 var/
 app/config/parameters*
 XMLFeed.cache
-admin700yqwpig/autoupgrade/
-admin700yqwpig/backups/
-admin700yqwpig/export/
-admin700yqwpig/import/
+admin700yqwpig/
 
 # ReSyst.cz end
 
