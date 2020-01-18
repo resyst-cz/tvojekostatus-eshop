@@ -14665,3 +14665,12 @@ ul.product-flags li.new {
   #index .spinner {
     min-height: 180px; } }
 
+.footer-after .copyright {
+  color: #777; }
+
+.footer-container .links.block-contact, .footer-container .links {
+  width: unset;
+  text-align: left; }
+
+.footer-container li a {
+  color: #333; }
