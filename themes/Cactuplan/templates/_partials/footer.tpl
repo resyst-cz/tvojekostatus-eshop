@@ -21,9 +21,7 @@
 
         <div class="copyright">
             {block name='copyright_link'}
-                <a class="_blank" href="http://www.prestashop.com" target="_blank">
-                    {l s='%copyright% %year% - Ecommerce software by %prestashop%' sprintf=['%prestashop%' => 'PrestaShop™', '%year%' => 'Y'|date, '%copyright%' => '©'] d='Shop.Theme.Global'}
-                </a>
+                {l s='%copyright% %year% %shopName%' sprintf=['%year%' => 'Y'|date, '%copyright%' => '©', '%shopName%' => $shop.name]}
             {/block}
         </div>
         {block name='hook_footer_after'}
