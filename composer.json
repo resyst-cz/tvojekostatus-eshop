@@ -14,6 +14,8 @@
   },
   "scripts": {
     "deploy:staging": "php vendor/dg/ftp-deployment/deployment deployment-staging.ini",
-    "deploy:staging:test": "@deploy:staging -t"
+    "deploy:staging:test": "@deploy:staging -t",
+    "deploy:production": "php vendor/dg/ftp-deployment/deployment deployment-production.ini",
+    "deploy:production:test": "@deploy:production -t"
   }
 }
