@@ -31,11 +31,6 @@
 	<input id="getTokenId" name="getTokenId" value="{$static_token}" type="hidden">
 
 	<div class="block-category card card-block ">
-		{if $category.image.large.url}
-			<div class="category-cover">
-				<img src="{$category.image.large.url}" alt="{if !empty($category.image.legend)}{$category.image.legend}{else}{$category.name}{/if}">
-			</div>
-		{/if}
 		<h1 class="h1">{$category.name}</h1>
 		{if $category.description}
 			<div id="category-description">{$category.description nofilter}</div>
@@ -61,7 +56,7 @@
 						{*
 						{if $subcategory.description}
 							<div class="cat_desc">{$subcategory.description nofilter}</div>
-						{/if}
+						{/if}   
 						*}
 					</li>
 				{/foreach}
