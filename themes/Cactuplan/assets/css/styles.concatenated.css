@@ -14677,3 +14677,14 @@ ul.product-flags li.new {
 
 .header-top-wrapper.fixed img.logo {
   max-height: 42px; }
+
+.breadcrumb .container .h1 {
+  display: block;
+  width: 100%;
+  float: none; }
+
+.breadcrumb ol {
+  text-align: left; }
+
+.breadcrumb li::after {
+  content: ">"; }
