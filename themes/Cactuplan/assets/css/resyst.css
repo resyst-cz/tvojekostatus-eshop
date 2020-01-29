@@ -21,3 +21,6 @@
 
 .breadcrumb li::after {
   content: ">"; }
+  
+#category-description h2, #category-description h3{
+  padding-top: 15px;
