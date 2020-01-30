@@ -1,0 +1,22 @@
+#czcategorytabs .categoryimage .category_img{ margin:25px 0; max-width: 100%; }
+#czcategorytabs .tab-content .tab-pane{
+	padding: 0px;
+    border: none;
+    background: none;
+}
+#czcategorytabs .nav-item .category-title {
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    padding: 0;
+}
+#czcategorytabs .tab-content .products{ position: relative; margin:0 -12px 0; }
+
+@media (max-width: 600px) {
+	#czcategorytabs .categoryimage{ display: none; }
+	#czcategorytabs .nav-item .category-title {
+		padding-top : 10px;
+		padding-bottom: 10px;
+	}
+}
