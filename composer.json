@@ -17,5 +17,8 @@
     "deploy:staging:test": "@deploy:staging -t",
     "deploy:production": "php vendor/dg/ftp-deployment/deployment deployment-production.ini",
     "deploy:production:test": "@deploy:production -t"
+  },
+  "config": {
+    "process-timeout": 0
   }
 }
