@@ -21,7 +21,6 @@
  * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
- *}
 {if $cart.vouchers.allowed}
   {block name='cart_voucher'}
     <div class="block-promo">
@@ -88,4 +87,4 @@
       </div>
     </div>
   {/block}
-{/if}
+
