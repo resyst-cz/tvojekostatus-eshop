@@ -1,142 +1,152 @@
-{**
- * 2007-2019 PrestaShop and Contributors
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * https://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@prestashop.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to https://www.prestashop.com for more information.
- *
- * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2019 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * International Registered Trademark & Property of PrestaShop SA
- *}
-
 {$style_tab}
-
+<table style="width: 100%; margin-top:-10pt; border-bottom: 1px solid black;">
+    <tr>
+        <td style="width: 70%; text-align: left; font-weight: bold; font-size: 14pt; color: #56904b;">{if isset($header)}{$header|escape:'html':'UTF-8'|upper}{/if}</td>
+        <td style="width: 30%; text-align: right;" rowspan="8">{if $logo_path}<img src="{$logo_path}" style="width:{$width_logo}px; height:{$height_logo}px;" />{/if}</td>
+    </tr>
+    <tr>
+        <td style="font-size: 12pt; color: #56904b">č. {$title|escape:'html':'UTF-8'}</td>
+    </tr>
+    <tr>
+        <td style="font-size: 10pt; color: #56904b">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="font-size: 10pt; color: #000">
+            <table>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Dátum vyhotovenia:</td>
+                    <td style="font-size: 8pt; color: #000">{dateFormat date=$order->invoice_date full=0}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Dátum splatnosti:</td>
+                    <td style="font-size: 8pt; color: #000">{dateFormat date=$order->invoice_date full=0}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Dátum dodania:</td>
+                    <td style="font-size: 8pt; color: #000">{dateFormat date=$order->invoice_date full=0}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Daň. povinnosť:</td>
+                    <td style="font-size: 8pt; color: #000">{dateFormat date=$order->invoice_date full=0}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Spôsob úhrady:</td>
+                    <td style="font-size: 8pt; color: #000">{foreach from=$order_invoice->getOrderPaymentCollection() item=payment}
+                            {$payment->payment_method}
+                        {/foreach}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Číslo objednávky:</td>
+                    <td style="font-size: 8pt; color: #000">{$order->getUniqReference()}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 
 <table width="100%" id="body" border="0" cellpadding="0" cellspacing="0" style="margin:0;">
-	<!-- Invoicing -->
-	<tr>
-		<td colspan="12">
+    <tr>
+        <td colspan="12" height="10">&nbsp;</td>
+    </tr>
 
-			{$addresses_tab}
+    <!-- Invoicing -->
+    <tr>
+        <td colspan="12">
 
-		</td>
-	</tr>
+            {$addresses_tab}
 
-	<tr>
-		<td colspan="12" height="30">&nbsp;</td>
-	</tr>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="12" height="20">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="12" height="40">Dodanie tovaru na základe objednávky č. {$order->getUniqReference()} zo dňa {dateFormat date=$order->date_add full=0}. Spôsob doručenia: {$carrier->name}. Spôsob
+            úhrady: {foreach from=$order_invoice->getOrderPaymentCollection() item=payment}{$payment->payment_method}{/foreach}.
+        </td>
+    </tr>
 
-	<!-- TVA Info -->
-	<tr>
-		<td colspan="12">
+    <!-- Product -->
+    <tr>
+        <td colspan="12">
 
-			{$summary_tab}
+            {$product_tab}
 
-		</td>
-	</tr>
+        </td>
+    </tr>
 
-	<tr>
-		<td colspan="12" height="20">&nbsp;</td>
-	</tr>
+    <tr>
+        <td colspan="12" height="10">&nbsp;</td>
+    </tr>
 
-	<!-- Product -->
-	<tr>
-		<td colspan="12">
+    <!-- TVA -->
+    <tr>
+        <!-- Code TVA -->
+        <td colspan="6" class="left">
 
-			{$product_tab}
+            {$tax_tab}
 
-		</td>
-	</tr>
+        </td>
+        <td colspan="1">&nbsp;</td>
 
-	<tr>
-		<td colspan="12" height="10">&nbsp;</td>
-	</tr>
 
-	<!-- TVA -->
-	<tr>
-		<!-- Code TVA -->
-		<td colspan="6" class="left">
+        <!-- Calcule TVA -->
+        <td colspan="5" rowspan="5" class="right">
 
-			{$tax_tab}
+            {$total_tab}
 
-		</td>
-		<td colspan="1">&nbsp;</td>
-		<!-- Calcule TVA -->
-		<td colspan="5" rowspan="5" class="right">
+        </td>
+    </tr>
+    {$note_tab}
+    <tr>
+        <td colspan="12" height="10">&nbsp;</td>
+    </tr>
 
-			{$total_tab}
+    <tr>
+        <td colspan="6" class="left">
 
-		</td>
-	</tr>
+            {*{$payment_tab}*}
 
-	{$note_tab}
+        </td>
+        <td colspan="1">&nbsp;</td>
+    </tr>
 
-	<tr>
-		<td colspan="12" height="10">&nbsp;</td>
-	</tr>
+    <tr>
+        <td colspan="6" class="left">
 
-	<tr>
-		<td colspan="6" class="left">
+            {*{$shipping_tab}*}
 
-			{$payment_tab}
+        </td>
+        <td colspan="1">&nbsp;</td>
+    </tr>
 
-		</td>
-		<td colspan="1">&nbsp;</td>
-	</tr>
+    <tr>
+        <td colspan="12" height="10">&nbsp;</td>
+    </tr>
 
-	<tr>
-		<td colspan="6" class="left">
 
-			{$shipping_tab}
+    {if isset($HOOK_DISPLAY_PDF)}
+        <tr>
+            <td colspan="6">
+                {$HOOK_DISPLAY_PDF}
+            </td>
+            <td colspan="1">&nbsp;</td>
+        </tr>
+    {/if}
 
-		</td>
-		<td colspan="1">&nbsp;</td>
-	</tr>
+    <tr>
+        <td colspan="7" class="left small">
 
-	<tr>
-		<td colspan="12" height="10">&nbsp;</td>
-	</tr>
+            <table>
+                <tr>
+                    <td>
+                        <p>{$legal_free_text|escape:'html':'UTF-8'|nl2br}</p>
+                    </td>
+                </tr>
+            </table>
 
-	<tr>
-		<td colspan="7" class="left small">
+        </td>
+    </tr>
 
-			<table>
-				<tr>
-					<td>
-						<p>{$legal_free_text|escape:'html':'UTF-8'|nl2br}</p>
-					</td>
-				</tr>
-			</table>
-
-		</td>
-	</tr>
-
-	<!-- Hook -->
-	{if isset($HOOK_DISPLAY_PDF)}
-	<tr>
-		<td colspan="12" height="30">&nbsp;</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">&nbsp;</td>
-		<td colspan="10">
-			{$HOOK_DISPLAY_PDF}
-		</td>
-	</tr>
-	{/if}
-
+    <!-- Hook -->
 </table>
