@@ -14691,3 +14691,37 @@ ul.product-flags li.new {
 
 #category-description h2, #category-description h3 {
   padding-top: 15px; }
+
+.top-menu a[data-depth="0"] {
+  text-transform: none; }
+
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.products-section-title {
+  text-transform: none !important; }
+
+.product-title a {
+  text-transform: none; }
+
+#czcategorytabs .nav-item .category-title {
+  text-transform: none; }
+
+.products .all-product-link,
+.products .product-title {
+  text-transform: none; }
+
+.block_newsletter .title {
+  text-transform: none; }
+
+.footer-container .links .h3, .footer-container .links h3, .footer-container .links h3 a {
+  text-transform: none !important; }
+
+.breadcrumb .container h1 {
+  text-transform: none; }
+
+#left-column .products-block ul li .product-title a, #right-column .products-block ul li .product-title a {
+  text-transform: none; }
+
+.delivery-options .carrier-delay {
+  font-weight: 200; }
