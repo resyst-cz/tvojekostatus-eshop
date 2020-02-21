@@ -19,7 +19,9 @@
                 </tr>
                 <tr>
                     <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Dátum splatnosti:</td>
-                    <td style="font-size: 8pt; color: #000">{dateFormat date=$order->invoice_date full=0}</td>
+                    {assign var="date" value=$order->invoice_date|@strtotime + (60*60*24*14)}
+                    {assign var="duzp" value=$date|date_format:"%Y-%m-%d"}
+                    <td style="font-size: 8pt; color: #000">{dateFormat date=$duzp full=0}</td>
                 </tr>
                 <tr>
                     <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Dátum dodania:</td>
@@ -31,9 +33,7 @@
                 </tr>
                 <tr>
                     <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Spôsob úhrady:</td>
-                    <td style="font-size: 8pt; color: #000">{foreach from=$order_invoice->getOrderPaymentCollection() item=payment}
-                            {$payment->payment_method}
-                        {/foreach}</td>
+                    <td style="font-size: 8pt; color: #000">{foreach from=$order_invoice->getOrderPaymentCollection() item=payment}{$payment->payment_method}{/foreach}</td>
                 </tr>
                 <tr>
                     <td style="font-size: 10pt; color: #000" style="width: 40%; text-align: left;">Číslo objednávky:</td>
