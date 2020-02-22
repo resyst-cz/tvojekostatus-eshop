@@ -81,7 +81,7 @@
     transition: all .3s ease-out;
     color: #F0F0F0 !important; }
 
-.block-promo .promo-code-button {
+.collapse-button.promo-code-button.cancel-promo {
   padding-left: 0;
   margin-bottom: 0;
   display: block; }
