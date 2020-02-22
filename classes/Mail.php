@@ -556,24 +556,6 @@ class MailCore extends ObjectModel
                 $message->addPart($templateHtml, 'text/html', 'utf-8');
             }
 
-            /**
-             * @author ReSyst.cz
-             * adding extra attachment start
-             */
-            if ($template === 'order_conf2') {
-                $extraAttachments = [
-                    'odstupenie_od_zmluvy.pdf',
-                    'poucenie_o_uplatneni_prava_spotrebitela.pdf',
-                    'vop.pdf'
-                ];
-                foreach ($extraAttachments as $file) {
-                    $message->attach(\Swift_Attachment::newInstance(file_get_contents(_PS_CORE_DIR_ . '/files/' . $file), $file, 'application/pdf'));
-                }
-            }
-            /**
-             * adding extra attachment end
-             */
-
             if ($fileAttachment && !empty($fileAttachment)) {
                 // Multiple attachments?
                 if (!is_array(current($fileAttachment))) {

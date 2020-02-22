@@ -470,7 +470,7 @@ class Mail extends MailCore
              * @author ReSyst.cz
              * adding extra attachment start
              */
-            if ($template === 'order_conf') {
+            if ($template === 'order_conf2') {
                 $extraAttachments = [
                     'odstupenie_od_zmluvy.pdf',
                     'poucenie_o_uplatneni_prava_spotrebitela.pdf',
@@ -493,7 +493,7 @@ class Mail extends MailCore
                 foreach ($fileAttachment as $attachment) {
                     if (isset($attachment['content'], $attachment['name'], $attachment['mime'])) {
                         $message->attach(
-                            Swift_Attachment::newInstance()->setFilename(
+                            \Swift_Attachment::newInstance()->setFilename(
                                 $attachment['name']
                             )->setContentType($attachment['mime'])
                                 ->setBody($attachment['content'])
