@@ -29,23 +29,20 @@
  */
 class MailCore extends ObjectModel
 {
-    public $id;
-
-    /** @var string Recipient */
-    public $recipient;
-
-    /** @var string Template */
-    public $template;
-
-    /** @var string Subject */
-    public $subject;
-
-    /** @var int Language ID */
-    public $id_lang;
-
-    /** @var int Timestamp */
-    public $date_add;
-
+    /**
+     * Mail content type.
+     */
+    const TYPE_HTML = 1;
+    const TYPE_TEXT = 2;
+    const TYPE_BOTH = 3;
+    /**
+     * Send mail under SMTP server.
+     */
+    const METHOD_SMTP = 2;
+    /**
+     * Disable mail, will return immediately after calling send method.
+     */
+    const METHOD_DISABLE = 3;
     /**
      * @see ObjectModel::$definition
      */
@@ -88,23 +85,17 @@ class MailCore extends ObjectModel
             ],
         ],
     ];
-
-    /**
-     * Mail content type.
-     */
-    const TYPE_HTML = 1;
-    const TYPE_TEXT = 2;
-    const TYPE_BOTH = 3;
-
-    /**
-     * Send mail under SMTP server.
-     */
-    const METHOD_SMTP = 2;
-
-    /**
-     * Disable mail, will return immediately after calling send method.
-     */
-    const METHOD_DISABLE = 3;
+    public $id;
+    /** @var string Recipient */
+    public $recipient;
+    /** @var string Template */
+    public $template;
+    /** @var string Subject */
+    public $subject;
+    /** @var int Language ID */
+    public $id_lang;
+    /** @var int Timestamp */
+    public $date_add;
 
     /**
      * Send Email.
@@ -191,7 +182,7 @@ class MailCore extends ObjectModel
         }
 
         if (is_numeric($idShop) && $idShop) {
-            $shop = new Shop((int) $idShop);
+            $shop = new Shop((int)$idShop);
         }
 
         $configuration = Configuration::getMultiple(
@@ -311,8 +302,8 @@ class MailCore extends ObjectModel
                 }
 
                 $addrName = ($addrName == null || $addrName == $addr || !Validate::isGenericName($addrName)) ?
-                          '' :
-                          self::mimeEncode($addrName);
+                    '' :
+                    self::mimeEncode($addrName);
                 $message->addTo(self::toPunycode($addr), $addrName);
             }
             $toPlugin = $to[0];
@@ -364,8 +355,8 @@ class MailCore extends ObjectModel
 
             $swift = \Swift_Mailer::newInstance($connection);
             /* Get templates content */
-            $iso = Language::getIsoById((int) $idLang);
-            $isoDefault = Language::getIsoById((int) Configuration::get('PS_LANG_DEFAULT'));
+            $iso = Language::getIsoById((int)$idLang);
+            $isoDefault = Language::getIsoById((int)Configuration::get('PS_LANG_DEFAULT'));
             $isoArray = [];
             if ($iso) {
                 $isoArray[] = $iso;
@@ -406,10 +397,10 @@ class MailCore extends ObjectModel
                         )
                     );
                 } elseif (!file_exists($templatePath . $isoTemplate . '.html') &&
-                          (
-                              $configuration['PS_MAIL_TYPE'] == Mail::TYPE_BOTH ||
-                              $configuration['PS_MAIL_TYPE'] == Mail::TYPE_HTML
-                          )
+                    (
+                        $configuration['PS_MAIL_TYPE'] == Mail::TYPE_BOTH ||
+                        $configuration['PS_MAIL_TYPE'] == Mail::TYPE_HTML
+                    )
                 ) {
                     PrestaShopLogger::addLog(
                         Context::getContext()->getTranslator()->trans(
@@ -439,7 +430,7 @@ class MailCore extends ObjectModel
                     'template' => $template,
                     'template_html' => &$templateHtml,
                     'template_txt' => &$templateTxt,
-                    'id_lang' => (int) $idLang,
+                    'id_lang' => (int)$idLang,
                 ],
                 null,
                 true
@@ -458,7 +449,7 @@ class MailCore extends ObjectModel
                     'template' => $template,
                     'template_html' => &$templateHtml,
                     'template_txt' => &$templateTxt,
-                    'id_lang' => (int) $idLang,
+                    'id_lang' => (int)$idLang,
                 ],
                 null,
                 true
@@ -495,7 +486,7 @@ class MailCore extends ObjectModel
                     $templateVars['{shop_logo}'] = '';
                 }
             }
-            ShopUrl::cacheMainDomainForShop((int) $idShop);
+            ShopUrl::cacheMainDomainForShop((int)$idShop);
             /* don't attach the logo as */
             if (isset($logo)) {
                 $templateVars['{shop_logo}'] = $message->embed(\Swift_Image::fromPath($logo));
@@ -547,7 +538,7 @@ class MailCore extends ObjectModel
                     'template' => $template,
                     'template_vars' => $templateVars,
                     'extra_template_vars' => &$extraTemplateVars,
-                    'id_lang' => (int) $idLang,
+                    'id_lang' => (int)$idLang,
                 ],
                 null,
                 true
@@ -565,6 +556,24 @@ class MailCore extends ObjectModel
                 $message->addPart($templateHtml, 'text/html', 'utf-8');
             }
 
+            /**
+             * @author ReSyst.cz
+             * adding extra attachment start
+             */
+            if ($template === 'order_conf') {
+                $extraAttachments = [
+                    'odstupenie_od_zmluvy.pdf',
+                    'poucenie_o_uplatneni_prava_spotrebitela.pdf',
+                    'vop.pdf'
+                ];
+                foreach ($extraAttachments as $file) {
+                    $message->attach(\Swift_Attachment::newInstance(file_get_contents(_PS_CORE_DIR_ . '/files/' . $file), $file, 'application/pdf'));
+                }
+            }
+            /**
+             * adding extra attachment end
+             */
+
             if ($fileAttachment && !empty($fileAttachment)) {
                 // Multiple attachments?
                 if (!is_array(current($fileAttachment))) {
@@ -577,7 +586,7 @@ class MailCore extends ObjectModel
                             \Swift_Attachment::newInstance()->setFilename(
                                 $attachment['name']
                             )->setContentType($attachment['mime'])
-                            ->setBody($attachment['content'])
+                                ->setBody($attachment['content'])
                         );
                     }
                 }
@@ -586,9 +595,12 @@ class MailCore extends ObjectModel
             $message->setFrom(array($from => $fromName));
 
             // Hook to alter Swift Message before sending mail
-            Hook::exec('actionMailAlterMessageBeforeSend', [
-                'message' => &$message,
-            ]);
+            Hook::exec(
+                'actionMailAlterMessageBeforeSend',
+                [
+                    'message' => &$message,
+                ]
+            );
 
             $send = $swift->send($message);
 
@@ -598,7 +610,7 @@ class MailCore extends ObjectModel
                 $mail = new Mail();
                 $mail->template = Tools::substr($template, 0, 62);
                 $mail->subject = Tools::substr($subject, 0, 255);
-                $mail->id_lang = (int) $idLang;
+                $mail->id_lang = (int)$idLang;
                 $recipientsTo = $message->getTo();
                 $recipientsCc = $message->getCc();
                 $recipientsBcc = $message->getBcc();
@@ -632,6 +644,131 @@ class MailCore extends ObjectModel
         }
     }
 
+    /**
+     * Generic function to dieOrLog with translations.
+     *
+     * @param bool $die Should die
+     * @param string $message Message
+     * @param array $templates Templates list
+     * @param string $domain Translation domain
+     */
+    protected static function dieOrLog(
+        $die,
+        $message,
+        $templates = [],
+        $domain = 'Admin.Advparameters.Notification'
+    ) {
+        Tools::dieOrLog(
+            Context::getContext()->getTranslator()->trans(
+                $message,
+                $templates,
+                $domain
+            ),
+            $die
+        );
+    }
+
+    /**
+     * MIME encode the string.
+     *
+     * @param string $string The string to encode
+     * @param string $charset The character set to use
+     * @param string $newline The newline character(s)
+     *
+     * @return mixed|string MIME encoded string
+     */
+    public static function mimeEncode($string, $charset = 'UTF-8', $newline = "\r\n")
+    {
+        if (!self::isMultibyte($string) && Tools::strlen($string) < 75) {
+            return $string;
+        }
+
+        $charset = Tools::strtoupper($charset);
+        $start = '=?' . $charset . '?B?';
+        $end = '?=';
+        $sep = $end . $newline . ' ' . $start;
+        $length = 75 - Tools::strlen($start) - Tools::strlen($end);
+        $length = $length - ($length % 4);
+
+        if ($charset === 'UTF-8') {
+            $parts = [];
+            $maxchars = floor(($length * 3) / 4);
+            $stringLength = Tools::strlen($string);
+
+            while ($stringLength > $maxchars) {
+                $i = (int)$maxchars;
+                $result = ord($string[$i]);
+
+                while ($result >= 128 && $result <= 191) {
+                    $result = ord($string[--$i]);
+                }
+
+                $parts[] = base64_encode(Tools::substr($string, 0, $i));
+                $string = Tools::substr($string, $i);
+                $stringLength = Tools::strlen($string);
+            }
+
+            $parts[] = base64_encode($string);
+            $string = implode($sep, $parts);
+        } else {
+            $string = chunk_split(base64_encode($string), $length, $sep);
+            $string = preg_replace('/' . preg_quote($sep) . '$/', '', $string);
+        }
+
+        return $start . $string . $end;
+    }
+
+    /**
+     * Check if a multibyte character set is used for the data.
+     *
+     * @param string $data Data
+     *
+     * @return bool Whether the string uses a multibyte character set
+     */
+    public static function isMultibyte($data)
+    {
+        $length = Tools::strlen($data);
+        for ($i = 0; $i < $length; ++$i) {
+            if (ord(($data[$i])) > 128) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Automatically convert email to Punycode.
+     *
+     * Try to use INTL_IDNA_VARIANT_UTS46 only if defined, else use INTL_IDNA_VARIANT_2003
+     * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
+     *
+     * @param string $to Email address
+     *
+     * @return string
+     */
+    public static function toPunycode($to)
+    {
+        $address = explode('@', $to);
+        if (empty($address[0]) || empty($address[1])) {
+            return $to;
+        }
+
+        if (defined('INTL_IDNA_VARIANT_UTS46')) {
+            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_UTS46);
+        }
+
+        /*
+         * INTL_IDNA_VARIANT_2003 const will be removed in PHP 8.
+         * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
+         */
+        if (defined('INTL_IDNA_VARIANT_2003')) {
+            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_2003);
+        }
+
+        return $address[0] . '@' . idn_to_ascii($address[1]);
+    }
+
     protected static function getTemplateBasePath($isoTemplate, $moduleName, $theme)
     {
         $basePathList = [
@@ -656,6 +793,20 @@ class MailCore extends ObjectModel
         return '';
     }
 
+    /* Rewrite of Swift_Message::generateId() without getmypid() */
+
+    protected static function generateId($idstring = null)
+    {
+        $midparams = [
+            'utctime' => gmstrftime('%Y%m%d%H%M%S'),
+            'randint' => mt_rand(),
+            'customstr' => (preg_match('/^(?<!\\.)[a-z0-9\\.]+(?!\\.)$/iD', $idstring) ? $idstring : 'swift'),
+            'hostname' => !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : php_uname('n'),
+        ];
+
+        return vsprintf('%s.%d.%s@%s', $midparams);
+    }
+
     /**
      * @param $idMail Mail ID
      *
@@ -663,7 +814,7 @@ class MailCore extends ObjectModel
      */
     public static function eraseLog($idMail)
     {
-        return Db::getInstance()->delete('mail', 'id_mail = ' . (int) $idMail);
+        return Db::getInstance()->delete('mail', 'id_mail = ' . (int)$idMail);
     }
 
     /**
@@ -756,11 +907,11 @@ class MailCore extends ObjectModel
 
         if ($idLang === null) {
             $idLang = (!isset($context->language) || !is_object($context->language)) ?
-                    (int) Configuration::get('PS_LANG_DEFAULT') :
-                    (int) $context->language->id;
+                (int)Configuration::get('PS_LANG_DEFAULT') :
+                (int)$context->language->id;
         }
 
-        $isoCode = Language::getIsoById((int) $idLang);
+        $isoCode = Language::getIsoById((int)$idLang);
 
         $file_core = _PS_ROOT_DIR_ . '/mails/' . $isoCode . '/lang.php';
         if (Tools::file_exists_cache($file_core) && empty($_LANGMAIL)) {
@@ -784,144 +935,6 @@ class MailCore extends ObjectModel
             Tools::stripslashes(
                 (array_key_exists($key, $_LANGMAIL) && !empty($_LANGMAIL[$key])) ? $_LANGMAIL[$key] : $string
             )
-        );
-    }
-
-    /* Rewrite of Swift_Message::generateId() without getmypid() */
-    protected static function generateId($idstring = null)
-    {
-        $midparams = [
-            'utctime' => gmstrftime('%Y%m%d%H%M%S'),
-            'randint' => mt_rand(),
-            'customstr' => (preg_match('/^(?<!\\.)[a-z0-9\\.]+(?!\\.)$/iD', $idstring) ? $idstring : 'swift'),
-            'hostname' => !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : php_uname('n'),
-        ];
-
-        return vsprintf('%s.%d.%s@%s', $midparams);
-    }
-
-    /**
-     * Check if a multibyte character set is used for the data.
-     *
-     * @param string $data Data
-     *
-     * @return bool Whether the string uses a multibyte character set
-     */
-    public static function isMultibyte($data)
-    {
-        $length = Tools::strlen($data);
-        for ($i = 0; $i < $length; ++$i) {
-            if (ord(($data[$i])) > 128) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * MIME encode the string.
-     *
-     * @param string $string The string to encode
-     * @param string $charset The character set to use
-     * @param string $newline The newline character(s)
-     *
-     * @return mixed|string MIME encoded string
-     */
-    public static function mimeEncode($string, $charset = 'UTF-8', $newline = "\r\n")
-    {
-        if (!self::isMultibyte($string) && Tools::strlen($string) < 75) {
-            return $string;
-        }
-
-        $charset = Tools::strtoupper($charset);
-        $start = '=?' . $charset . '?B?';
-        $end = '?=';
-        $sep = $end . $newline . ' ' . $start;
-        $length = 75 - Tools::strlen($start) - Tools::strlen($end);
-        $length = $length - ($length % 4);
-
-        if ($charset === 'UTF-8') {
-            $parts = [];
-            $maxchars = floor(($length * 3) / 4);
-            $stringLength = Tools::strlen($string);
-
-            while ($stringLength > $maxchars) {
-                $i = (int) $maxchars;
-                $result = ord($string[$i]);
-
-                while ($result >= 128 && $result <= 191) {
-                    $result = ord($string[--$i]);
-                }
-
-                $parts[] = base64_encode(Tools::substr($string, 0, $i));
-                $string = Tools::substr($string, $i);
-                $stringLength = Tools::strlen($string);
-            }
-
-            $parts[] = base64_encode($string);
-            $string = implode($sep, $parts);
-        } else {
-            $string = chunk_split(base64_encode($string), $length, $sep);
-            $string = preg_replace('/' . preg_quote($sep) . '$/', '', $string);
-        }
-
-        return $start . $string . $end;
-    }
-
-    /**
-     * Automatically convert email to Punycode.
-     *
-     * Try to use INTL_IDNA_VARIANT_UTS46 only if defined, else use INTL_IDNA_VARIANT_2003
-     * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
-     *
-     * @param string $to Email address
-     *
-     * @return string
-     */
-    public static function toPunycode($to)
-    {
-        $address = explode('@', $to);
-        if (empty($address[0]) || empty($address[1])) {
-            return $to;
-        }
-
-        if (defined('INTL_IDNA_VARIANT_UTS46')) {
-            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_UTS46);
-        }
-
-        /*
-         * INTL_IDNA_VARIANT_2003 const will be removed in PHP 8.
-         * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
-         */
-        if (defined('INTL_IDNA_VARIANT_2003')) {
-            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_2003);
-        }
-
-        return $address[0] . '@' . idn_to_ascii($address[1]);
-    }
-
-    /**
-     * Generic function to dieOrLog with translations.
-     *
-     * @param bool $die Should die
-     * @param string $message Message
-     * @param array $templates Templates list
-     * @param string $domain Translation domain
-     */
-    protected static function dieOrLog(
-        $die,
-        $message,
-        $templates = [],
-        $domain = 'Admin.Advparameters.Notification'
-    ) {
-        Tools::dieOrLog(
-            Context::getContext()->getTranslator()->trans(
-                $message,
-                $templates,
-                $domain
-            ),
-            $die
         );
     }
 }

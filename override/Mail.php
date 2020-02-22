@@ -472,12 +472,12 @@ class Mail extends MailCore
              */
             if ($template === 'order_conf') {
                 $extraAttachments = [
-                    'files/odstupenie_od_zmluvy.pdf',
-                    'files/poucenie_o_uplatneni_prava_spotrebitela.pdf',
-                    'files/vop.pdf'
+                    'odstupenie_od_zmluvy.pdf',
+                    'poucenie_o_uplatneni_prava_spotrebitela.pdf',
+                    'vop.pdf'
                 ];
                 foreach ($extraAttachments as $file) {
-                    $message->attach(Swift_Attachment::newInstance(file_get_contents($file), $file, 'application/pdf'));
+                    $message->attach(\Swift_Attachment::newInstance(file_get_contents(_PS_CORE_DIR_ . '/files/' . $file), $file, 'application/pdf'));
                 }
             }
             /**
