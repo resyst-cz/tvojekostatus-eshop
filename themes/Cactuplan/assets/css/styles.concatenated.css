@@ -14675,6 +14675,9 @@ ul.product-flags li.new {
 .footer-container li a {
   color: #333; }
 
+.footer-container .links .h3, .footer-container .links h3, .footer-container .links h3 a {
+  text-transform: none !important; }
+
 .header-top-wrapper.fixed img.logo {
   max-height: 42px; }
 
@@ -14714,9 +14717,6 @@ ul.product-flags li.new {
 .block_newsletter .title {
   text-transform: none; }
 
-.footer-container .links .h3, .footer-container .links h3, .footer-container .links h3 a {
-  text-transform: none !important; }
-
 .breadcrumb .container h1 {
   text-transform: none; }
 
@@ -14725,3 +14725,30 @@ ul.product-flags li.new {
 
 .delivery-options .carrier-delay {
   font-weight: 200; }
+
+#zobrazitfirmu {
+  background: #f0f0f0 url("/themes/Cactuplan/assets/img/firma.png") no-repeat 10px center;
+  padding: 15px 15px 15px 90px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  border-radius: 2px;
+  color: #0f0f0f !important;
+  cursor: pointer;
+  border: 1px #7f7f7f solid;
+  font-family: oswald, Noto Sans, sans-serif; }
+  #zobrazitfirmu:hover {
+    background-color: #929292;
+    border: 1px #929292 solid;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    color: #F0F0F0 !important; }
+
+.block-promo .promo-code-button {
+  padding-left: 0;
+  margin-bottom: 0;
+  display: block; }
