@@ -19,7 +19,7 @@
     }
 
     table.product {
-        border: 1px solid{$color_border};
+        border: 1px solid {$color_border};
         border-collapse: collapse;
     }
 
@@ -29,17 +29,17 @@
 
     table#summary-tab {
         padding: {$table_padding};
-        border: 1pt solid{$color_border};
+        border: 1pt solid {$color_border};
     }
 
     table#total-tab {
         padding: {$table_padding};
-        border: 1pt solid{$color_border};
+        border: 1pt solid {$color_border};
     }
 
     table#note-tab {
         padding: {$table_padding};
-        border: 1px solid{$color_border};
+        border: 1px solid {$color_border};
     }
 
     table#note-tab td.note {
@@ -48,25 +48,25 @@
 
     table#tax-tab {
         padding: {$table_padding};
-        border: 1pt solid{$color_border};
+        border: 1pt solid {$color_border};
     }
 
     table#payment-tab,
     table#shipping-tab {
         padding: {$table_padding};
-        border: 1px solid{$color_border};
+        border: 1px solid {$color_border};
     }
 
     th.product {
-        border-bottom: 1px solid{$color_border};
+        border-bottom: 1px solid {$color_border};
     }
 
     tr.discount th.header {
-        border-top: 1px solid{$color_border};
+        border-top: 1px solid {$color_border};
     }
 
     tr.product td {
-        border-bottom: 1px solid{$color_border_lighter};
+        border-bottom: 1px solid {$color_border_lighter};
     }
 
     tr.color_line_even {

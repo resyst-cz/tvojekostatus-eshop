@@ -78,7 +78,7 @@
 
                     {if $addresses.delivery->company}
                         <tr>
-                        <td style="width:30%">Název:</td>
+                        <td style="width:30%">Názov:</td>
                         <td style="width:70%">{$addresses.delivery->company}</td></tr>{/if}
                     <tr>
                         <td style="width:30%">Meno:</td>
@@ -96,6 +96,10 @@
                         <tr>
                         <td style="width:30%">IČ DPH:</td>
                         <td style="width:70%">{$addresses.delivery->vat_number}</td></tr>{/if}
+                    {if $addresses.delivery->address2}
+                        <tr>
+                        <td style="width:30%">DIČ:</td>
+                        <td style="width:70%">{$addresses.delivery->address2}</td></tr>{/if}    
                     {if $addresses.delivery->dni}
                         <tr>
                         <td style="width:30%">IČO:</td>
@@ -112,7 +116,7 @@
 
                     {if $addresses.invoice->company}
                         <tr>
-                        <td style="width:30%">Název:</td>
+                        <td style="width:30%">Názov:</td>
                         <td style="width:70%">{$addresses.invoice->company}</td></tr>{/if}
                     <tr>
                         <td style="width:30%"></td>
@@ -130,6 +134,10 @@
                         <tr>
                         <td style="width:30%">IČ DPH:</td>
                         <td style="width:70%">{$addresses.invoice->vat_number}</td></tr>{/if}
+                    {if $addresses.delivery->address2}
+                        <tr>
+                        <td style="width:30%">DIČ:</td>
+                        <td style="width:70%">{$addresses.delivery->address2}</td></tr>{/if}   
                     {if $addresses.invoice->dni}
                         <tr>
                         <td style="width:30%">IČO:</td>
