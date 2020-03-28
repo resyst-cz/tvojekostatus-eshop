@@ -29,7 +29,7 @@
       <a href="{$product.url}" class="thumbnail product-thumbnail">
         <img
           src = "{$product.cover.bySize.home_default.url}"
-            alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
+            alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:120:'...'}{/if}"
           data-full-size-image-url = "{$product.cover.large.url}"
         >
 		{hook h="displayCzHoverImage" id_product=$product.id_product home='home_default' large='large_default'}
@@ -53,7 +53,7 @@
 	 {/block}
 		 
       {block name='product_name'}
-        <span class="h3 product-title" itemprop="name"><a href="{$product.url}">{$product.name|truncate:30:'...'}</a></span>
+        <span class="h3 product-title" itemprop="name"><a href="{$product.url}">{$product.name|truncate:120:'...'}</a></span>
       {/block}
 
       {block name='product_price_and_shipping'}
