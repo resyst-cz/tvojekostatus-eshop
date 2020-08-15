@@ -37,8 +37,14 @@
 .products-section-title {
   text-transform: none !important; }
 
-.product-title a {
-  text-transform: none; }
+.product-title {
+  text-overflow: unset;
+  overflow: unset;
+  white-space: unset;
+  word-break: break-word; }
+  .product-title a {
+    text-transform: none;
+    letter-spacing: unset; }
 
 #czcategorytabs .nav-item .category-title {
   text-transform: none; }

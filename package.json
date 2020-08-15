@@ -5,7 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "concat": "^1.0.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "sass": "^1.23.7",
     "uglify-js": "^3.7.3",
     "uglifycss": "0.0.29"
